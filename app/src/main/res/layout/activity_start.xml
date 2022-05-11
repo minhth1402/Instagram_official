@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
+    tools:context=".StartActivity">
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/email_field"
+
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
+
+        >
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/email"
+
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:hint="Email"
+
+            android:maxLines="1"
+            android:singleLine="true"
+
+
+
+            />
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/password_field"
+
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginHorizontal="20dp"
+
+
+        app:counterEnabled="true"
+
+        app:passwordToggleEnabled="true">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/password"
+
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:hint="Password"
+
+
+            android:maxLines="1"
+            android:singleLine="true"
+
+
+            />
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <Button
+        android:id="@+id/login_bt"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
+        android:layout_marginTop="15dp"
+        android:backgroundTint="@color/colorPrimary"
+        android:text="Login" />
+
+
+
+    <LinearLayout
+        android:id="@+id/forgot_password_field"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:clickable="true"
+        android:focusable="true"
+        android:padding="5dp"
+        >
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:textColor="@color/colorPrimary"
+            android:textStyle="italic"
+            android:text="Forgotten password"
+            android:textSize="15sp" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/colorPrimary"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:gravity="center_vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:paddingHorizontal="20dp"
+        android:orientation="horizontal"
+
+        >
+
+        <View
+            android:layout_weight="2"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:background="@color/darkerGrey"/>
+        <TextView
+            android:layout_weight="0"
+            android:layout_marginHorizontal="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="OR"/>
+
+        <View
+            android:layout_weight="2"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:background="@color/darkerGrey"/>
+
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/register_field"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:padding="10dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:textColor="#2196F3"
+        android:text="Not a user. Register now"
+        android:textSize="15sp" />
+
+</LinearLayout>
