@@ -3,6 +3,7 @@ package com.minhthieu.instagramofficial;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -130,6 +131,12 @@ public class StartActivity extends AppCompatActivity {
                         @Override
                         public void onSuccess(AuthResult authResult) {
                             Toast.makeText(StartActivity.this, "Welcome back", Toast.LENGTH_SHORT).show();
+                            // go to main
+
+                            Intent intent = new Intent(StartActivity.this, MainActivity.class)
+                                    .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                            startActivity(intent);
+
                         }
                     }).addOnFailureListener(new OnFailureListener() {
                         @Override
@@ -151,6 +158,17 @@ public class StartActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 forgotPasswordCall();
+            }
+        });
+
+
+        // Move to Register activity (Not a user button)
+        notAUser.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(StartActivity.this, RegisterActivity.class)
+                        .addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(intent);
             }
         });
     }
