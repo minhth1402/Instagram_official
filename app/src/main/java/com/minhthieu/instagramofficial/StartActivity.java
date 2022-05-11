@@ -31,6 +31,8 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Objects;
+
 public class StartActivity extends AppCompatActivity {
     // basic
     private Button loginBt;
@@ -72,6 +74,19 @@ public class StartActivity extends AppCompatActivity {
         // Contain onTextChangeListener
         ContainOnTextChangeListener();
 
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        if(mAuth.getCurrentUser() != null) {
+            Intent intent = new Intent(StartActivity.this, MainActivity.class)
+                    .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            startActivity(intent);
+
+        } else {
+            Objects.requireNonNull(mAuth.getCurrentUser()).reload();
+        }
     }
 
     private void ContainOnTextChangeListener() {
