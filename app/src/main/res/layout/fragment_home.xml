@@ -34,7 +34,7 @@
     <com.yarolegovich.discretescrollview.DiscreteScrollView
         android:id="@+id/horizontal_scroller"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="310dp"
         android:layout_centerInParent="true"
         />
 
