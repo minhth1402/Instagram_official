@@ -1,10 +1,12 @@
 package com.minhthieu.instagramofficial.Adapters;
 
 import android.content.Context;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -48,7 +50,12 @@ public class SearchRecyclerAdapter extends RecyclerView.Adapter<SearchRecyclerAd
 
         SearchRecyclerItem localUser = userList.get(position);
 
-        Picasso.get().load(localUser.getImageUrl()).into(holder.profileImage);
+        holder.profileImage.setImageURI(Uri.parse(localUser.getImageUrl()));
+
+        Toast.makeText(mContext, "image uri " + localUser.getImageUrl(), Toast.LENGTH_SHORT).show();
+        holder.fullName.setText(localUser.getFullname().toString());
+        holder.userName.setText(localUser.getUsername());
+
 
     }
 

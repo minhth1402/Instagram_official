@@ -24,6 +24,7 @@ public class SearchRecyclerItem {
     }
 
     public String getUsername() {
+
         return Username;
     }
 
