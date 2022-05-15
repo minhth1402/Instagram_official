@@ -3,7 +3,10 @@ package com.minhthieu.instagramofficial;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.ContentResolver;
 import android.content.Intent;
+import android.content.res.Resources;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -24,6 +27,8 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
 import com.google.firebase.auth.FirebaseAuthWeakPasswordException;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.UserProfileChangeRequest;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -138,6 +143,20 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onSuccess(AuthResult authResult) {
                 Toast.makeText(RegisterActivity.this, "Welcome to Instagram", Toast.LENGTH_SHORT).show();
+
+                // get drawable Uri
+                Uri imageUri = Uri.parse(ContentResolver.SCHEME_ANDROID_RESOURCE +
+                        "://" + getResources().getResourcePackageName(R.drawable.ic_baseline_person_24)
+                        + '/' + getResources().getResourceTypeName(R.drawable.ic_baseline_person_24) + '/' + getResources().getResourceEntryName(R.drawable.ic_baseline_person_24) );
+
+
+                // set name to authentication
+                FirebaseUser user = mAuth.getCurrentUser();
+                UserProfileChangeRequest profileUpdate = new UserProfileChangeRequest.Builder()
+                        .setDisplayName(fullname)
+                        .setPhotoUri(imageUri)
+                        .build();
+
                 PushUserInfoToDatabase(email, password, fullname, username);
             }
         }).addOnFailureListener(new OnFailureListener() {
@@ -170,6 +189,7 @@ public class RegisterActivity extends AppCompatActivity {
         info.put("Email", email);
         info.put("Fullname", fullname);
         info.put("UserID", mAuth.getCurrentUser().getUid());
+        info.put("imageUrl",mAuth.getCurrentUser().getPhotoUrl());
 
         mUserReference.child(mAuth.getCurrentUser().getUid()).setValue(info).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
