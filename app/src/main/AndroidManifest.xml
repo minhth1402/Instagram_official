@@ -9,7 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.InstagramOfficial">
-        <activity android:name=".RegisterActivity"></activity>
+        <activity android:name=".PostActivity"></activity>
+        <activity android:name=".RegisterActivity" />
         <activity android:name=".MainActivity" />
         <activity
             android:name=".StartActivity"
@@ -20,6 +21,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity android:name="ir.shahabazimi.instagrampicker.gallery.SelectActivity" />
+        <activity android:name="ir.shahabazimi.instagrampicker.filter.FilterActivity" />
+        <activity android:name="ir.shahabazimi.instagrampicker.gallery.MultiSelectActivity"/>
+        <activity
+            android:name="com.yalantis.ucrop.UCropActivity"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.AppCompat.Light.NoActionBar"/>
+
+
     </application>
 
 </manifest>

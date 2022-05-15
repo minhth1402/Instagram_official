@@ -1,5 +1,6 @@
 package com.minhthieu.instagramofficial.Fragments;
 
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 
@@ -8,9 +9,13 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageView;
 
 import com.minhthieu.instagramofficial.Adapters.HomeRecyclerItemAdapter;
+import com.minhthieu.instagramofficial.MainActivity;
 import com.minhthieu.instagramofficial.Models.HomeRecyclerItem;
+import com.minhthieu.instagramofficial.PostActivity;
 import com.minhthieu.instagramofficial.R;
 import com.yarolegovich.discretescrollview.DiscreteScrollView;
 import com.yarolegovich.discretescrollview.InfiniteScrollAdapter;
@@ -23,15 +28,24 @@ public class HomeFragment extends Fragment {
 
     private DiscreteScrollView horizontalScroller;
     private List<HomeRecyclerItem> homeRecyclerItems = new ArrayList<>();
+    
+    // 
+    private ImageView addPostBt;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_home, container, false);
+        
+        // =================== +++ ===================
         // Anh xa
         horizontalScroller = view.findViewById(R.id.horizontal_scroller);
-
+        addPostBt = view.findViewById(R.id.add_post_button);
+        
+        // add OnclickList cho cái post button
+        ContainOnClickListener();
+        
         // add them item vao list
         AddItemToHomeCard();
 
@@ -59,8 +73,20 @@ public class HomeFragment extends Fragment {
         return view;
     }
 
+    private void ContainOnClickListener() {
+        addPostBt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // đây là cách chuyển từ fragment sang activity
+                Intent intent = new Intent(getActivity(), PostActivity.class);
+                startActivity(intent);
+            }
+        });
+    }
+
     private void AddItemToHomeCard() {
 
+        // add mấy cái item sau nha, nhưng để t lm xong cái cn post cái
         List<String> list = new ArrayList<>();
         list.add("0");
         list.add("0");
