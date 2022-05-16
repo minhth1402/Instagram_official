@@ -1,9 +1,12 @@
 package com.minhthieu.instagramofficial.Fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -23,8 +26,10 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.minhthieu.instagramofficial.Adapters.SearchRecyclerAdapter;
+import com.minhthieu.instagramofficial.MainActivity;
 import com.minhthieu.instagramofficial.Models.SearchRecyclerItem;
 import com.minhthieu.instagramofficial.R;
+import com.minhthieu.instagramofficial.SearchUserForRealActivity;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -33,12 +38,6 @@ import java.util.List;
 
 public class SearchFragment extends Fragment {
 
-    private List<SearchRecyclerItem> userList = new ArrayList<>();
-    private TextInputLayout searchBarLayout;
-    private TextInputEditText searchBarText;
-
-    // the adpater
-    SearchRecyclerAdapter userAdapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -46,68 +45,23 @@ public class SearchFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_search, container, false);
 
-        // recycler view
-        RecyclerView showUsersView = view.findViewById(R.id.recycler_show_user_view);
-        showUsersView.setHasFixedSize(true);
-        showUsersView.setLayoutManager(new LinearLayoutManager(getContext()));
-
-        // search bar
-        searchBarLayout = view.findViewById(R.id.search_bar_layout);
-        searchBarText = view.findViewById(R.id.search_bar_edittext);
-
-
-        // time to set the adapter, bitchhhh
-        userAdapter = new SearchRecyclerAdapter(userList, getContext());
-        showUsersView.setAdapter(userAdapter);
-
-        // notify cái text nó change
-        searchBarText.addTextChangedListener(new TextWatcher() {
+        //Anh xa
+        TextInputEditText searchBar = view.findViewById(R.id.search_bar_edittext);
+        searchBar.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+            public void onClick(View view) {
 
-            }
-
-            @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
-            @Override
-            public void afterTextChanged(Editable editable) {
-                readUsers();
+                Fragment searchFragment= new SearchUserReal();
+                FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+                fragmentTransaction.replace(R.id.fragment_container, searchFragment);
+                fragmentTransaction.commit();
 
             }
         });
 
-        // read users from database
 
         return view;
     }
 
-    private void readUsers() {
-        DatabaseReference userRealTimeRef = FirebaseDatabase.getInstance().getReference("Users");
-        userRealTimeRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
-                if (searchBarText.getText().toString().isEmpty()) {
-                    userList.clear();
-                }
-                for (DataSnapshot data : snapshot.getChildren()) {
-                    SearchRecyclerItem userInfo = data.getValue(SearchRecyclerItem.class);
-
-                    // add them to the list
-                    userList.add(userInfo);
-
-                }
-
-                userAdapter.notifyDataSetChanged();
-
-            }
-
-            @Override
-            public void onCancelled(@NonNull @NotNull DatabaseError error) {
-
-            }
-        });
-    }
 }
