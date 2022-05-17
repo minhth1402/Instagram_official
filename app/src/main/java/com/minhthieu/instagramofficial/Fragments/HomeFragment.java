@@ -5,6 +5,8 @@ import android.net.Uri;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -70,7 +72,19 @@ public class HomeFragment extends Fragment {
 
         // this belong to the fragment
         // cai ly do ma no phai dung view như vầy là vì cái minh phải khai cái view trên kia mà tìm findViewById (vì có nhiều fragment mà)
+
+        MoveToHomeAfterUse();
+
         return view;
+    }
+
+    private void MoveToHomeAfterUse() {
+        Fragment homeAfterUseFragment= new HomeAfterUseFragment();
+        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.fragment_container, homeAfterUseFragment);
+        fragmentTransaction.commit();
+
     }
 
     private void ContainOnClickListener() {
@@ -83,6 +97,9 @@ public class HomeFragment extends Fragment {
             }
         });
     }
+
+
+
 
     private void AddItemToHomeCard() {
 

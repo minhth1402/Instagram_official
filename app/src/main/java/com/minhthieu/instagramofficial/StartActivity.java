@@ -76,6 +76,7 @@ public class StartActivity extends AppCompatActivity {
 
     }
 
+    /*
     @Override
     protected void onStart() {
         super.onStart();
@@ -88,7 +89,7 @@ public class StartActivity extends AppCompatActivity {
             Objects.requireNonNull(mAuth.getCurrentUser()).reload();
         }
     }
-
+    */
     private void ContainOnTextChangeListener() {
         // email
         emailEdit.addTextChangedListener(new TextWatcher() {
