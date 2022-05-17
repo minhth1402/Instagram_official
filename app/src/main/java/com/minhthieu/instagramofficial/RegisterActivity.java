@@ -189,6 +189,12 @@ public class RegisterActivity extends AppCompatActivity {
         info.put("UserID", mAuth.getCurrentUser().getUid());
         info.put("imageUrl",GetImageUrl());
 
+        // create followers and following
+
+        // followers
+        FirebaseDatabase.getInstance().getReference("Follow").child("Followers").child(mAuth.getCurrentUser().getUid());
+        // following
+
         mUserReference.child(mAuth.getCurrentUser().getUid()).setValue(info).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull @NotNull Task<Void> task) {

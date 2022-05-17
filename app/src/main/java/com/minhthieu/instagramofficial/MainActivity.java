@@ -17,6 +17,8 @@ import com.minhthieu.instagramofficial.Fragments.SearchFragment;
 
 import org.jetbrains.annotations.NotNull;
 
+import de.hdodenhof.circleimageview.CircleImageView;
+
 public class MainActivity extends AppCompatActivity {
 
     private BottomNavigationView bottomNavigationView;
